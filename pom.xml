@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+							 http://maven.apache.org/xsd/maven-4.0.0.xsd" 
+		 xmlns="http://maven.apache.org/POM/4.0.0"
+    	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    	      	  
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.springboot</groupId>
+  <artifactId>springboot</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  
+  <parent>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-parent</artifactId>
+	<version>1.5.7.RELEASE</version>
+  </parent>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <org.springframework-version>4.3.11.RELEASE</org.springframework-version>
+    <bonecp-spring-version>0.8.0.RELEASE</bonecp-spring-version>
+    <org.mybatis-version>3.4.5</org.mybatis-version>
+  	<mybatis-spring-version>1.3.0</mybatis-spring-version>
+  	<com.github.pagehelper-version>4.2.1</com.github.pagehelper-version>
+  	<com.github.abel533-version>3.0.1</com.github.abel533-version>
+  	<commons-lang3.version>3.6</commons-lang3.version>
+  </properties>
+  
+  <dependencies>
+  	<!-- WEB -->
+    <dependency>
+	  <groupId>org.springframework.boot</groupId>
+	  <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <!-- AOP -->
+    <dependency>  
+	  <groupId>org.springframework.boot</groupId>  
+	  <artifactId>spring-boot-starter-aop</artifactId>  
+	</dependency>
+    <!-- TRANSACTION -->
+    <dependency>  
+	  <groupId>org.springframework.boot</groupId>  
+	  <artifactId>spring-boot-starter-jdbc</artifactId>  
+	</dependency>
+	<!-- TOMCAT -->
+	<dependency>
+	  <groupId>org.springframework.boot</groupId>
+	  <artifactId>spring-boot-starter-tomcat</artifactId>
+	  <scope>provided</scope><!--打war包时，排除该包，可放置独立的tomcat中运行 -->
+	</dependency>
+	<!-- JUINT -->
+    <dependency>  
+	  <groupId>org.springframework.boot</groupId>  
+	  <artifactId>spring-boot-starter-test</artifactId>  
+	</dependency>
+	
+	<!-- BONECP --> 
+    <dependency>
+	  <groupId>com.jolbox</groupId>
+	  <artifactId>bonecp-spring</artifactId>
+	  <version>${bonecp-spring-version}</version>
+    </dependency>
+    <!-- MySql -->
+	<dependency>
+	  <groupId>mysql</groupId>
+	  <artifactId>mysql-connector-java</artifactId>
+	</dependency>
+	<!-- MyBatis -->
+	<dependency>
+	  <groupId>org.mybatis</groupId>
+	  <artifactId>mybatis</artifactId>
+	  <version>${org.mybatis-version}</version>
+	  <!-- <version>3.4.5</version> -->
+	</dependency>
+  	<!-- MyBatis Spring -->
+	<dependency>
+	  <groupId>org.mybatis</groupId>
+	  <artifactId>mybatis-spring</artifactId>
+	  <version>${mybatis-spring-version}</version>
+	</dependency>
+	<!-- MyBatis PageHelper -->
+	<dependency>
+	  <groupId>com.github.pagehelper</groupId>
+	  <artifactId>pagehelper</artifactId>
+	  <version>${com.github.pagehelper-version}</version>
+	</dependency>
+	<!-- 通用Mapper -->
+	<dependency>
+	  <groupId>com.github.abel533</groupId>
+	  <artifactId>mapper</artifactId>
+	  <version>${com.github.abel533-version}</version>
+	</dependency>
+	
+    <!-- GSON -->
+	<dependency>
+	  <groupId>com.google.code.gson</groupId>
+	  <artifactId>gson</artifactId>
+	</dependency>
+	<!-- commons-lang3 -->
+  	<dependency>
+	  <groupId>org.apache.commons</groupId>
+	  <artifactId>commons-lang3</artifactId>
+	  <version>${commons-lang3.version}</version>
+    </dependency>
+    <!-- 解决springboot内嵌tomcat不支持jsp -->
+    <!-- <dependency>
+	  <groupId>org.apache.tomcat.embed</groupId>
+	  <artifactId>tomcat-embed-jasper</artifactId>
+	  <scope>provided</scope>
+	</dependency> -->
+  </dependencies>
+	
+  <build>
+    <finalName>${project.artifactId}</finalName>
+    <plugins>
+      <!-- springboot maven启动插件 -->
+      <plugin>
+      	<groupId>org.springframework.boot</groupId>
+      	<artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <!-- 资源文件拷贝插件 -->
+	  <plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-resources-plugin</artifactId>
+		<configuration>
+		  <encoding>UTF-8</encoding>
+		</configuration>
+	  </plugin>
+      <!-- 编译插件 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+          <encoding>${project.build.sourceEncoding}</encoding>
+        </configuration>
+      </plugin>
+      <!-- source打包插件 -->
+      <plugin>
+      	<groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <configuration>
+          <attach>true</attach>
+        </configuration>  
+        <executions>  
+          <execution>  
+            <phase>package</phase>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>  
+          </execution>  
+        </executions>  
+      </plugin>
+      <!-- javadoc插件 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>  
+          <aggregate>true</aggregate>  
+        </configuration>
+        <executions>  
+          <execution>  
+            <id>attach-javadocs</id>  
+            <goals>  
+              <goal>jar</goal>  
+            </goals>  
+          </execution>  
+        </executions>  
+      </plugin>
+      <!-- 打包忽略Junit测试 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+	  <!-- war -->
+      <plugin>  
+        <artifactId>maven-war-plugin</artifactId>  
+        <configuration>  
+            <version>3.0</version> 
+            <failOnMissingWebXml>false</failOnMissingWebXml> 
+        </configuration>  
+      </plugin>
+    </plugins>
+    
+    <!-- <pluginManagement>
+	  <plugins>
+		配置Tomcat插件
+		<plugin>
+		  <groupId>org.apache.tomcat.maven</groupId>
+		  <artifactId>tomcat7-maven-plugin</artifactId>
+		  <version>2.2</version>
+		</plugin>
+	  </plugins>
+    </pluginManagement> -->
+  </build>
+</project>

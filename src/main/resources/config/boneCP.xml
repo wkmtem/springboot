@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+						   http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+						   http://www.springframework.org/schema/jdbc
+     					   http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd">
+
+	<!-- 25倍c3p0速度 -->
+	<!-- <bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close"> -->
+		<!-- 连接基本信息 -->
+		<!-- <property name="driverClass" value="${c3p0.driverClass}"/>
+		<property name="jdbcUrl" value="${c3p0.url}" />
+		<property name="username" value="${c3p0.user}" />
+		<property name="password" value="${c3p0.password}"/> -->
+		
+		<!-- 参数设置 -->
+		<!-- 检查数据库连接池中空闲连接的间隔时间, 单位:分钟, 默认:240, 取消:0 -->   
+        <!-- <property name="idleConnectionTestPeriod" value="60"/> --> 
+        <!-- 连接池中未使用的连接最大存活时间, 单位:分钟, 默认:60, 永远存活:0 -->
+        <!-- <property name="idleMaxAge" value="30"/> --> 
+        <!-- 每个分区最大的连接数, 判断依据: 请求并发数 -->
+        <!-- <property name="maxConnectionsPerPartition" value="100"/> -->
+        <!-- 每个分区最小的连接数, 判断依据: 请求并发数 -->
+        <!-- <property name="minConnectionsPerPartition" value="5"/> -->
+        <!-- 分区数, 默认:2, 最小:1, 推荐:3-4, 视应用而定-->  
+        <!-- <property name="partitionCount" value="4" /> -->  
+        <!-- 每次去拿数据库连接的时候一次性要拿几个, 默认:2 -->  
+        <!-- <property name="acquireIncrement" value="2" /> -->  
+        <!-- 缓存prepared statements的大小, 默认:0 -->  
+        <!-- <property name="statementsCacheSize" value="0" /> -->  
+        
+        <!-- 不常用配置 -->
+        <!-- 在做keep-alive的时候的测试SQL语句 -->
+        <!-- <property name="connectionTestStatement" value="sql语句" /> -->
+		<!-- 每次连接数据库取连接时执行的SQL语句, 只执行一次 -->
+		<!-- <property name="initSQL" value="指定仅在首次创建连接时运行的初始SQL语句" /> -->
+		<!-- 线程监控关闭连接时的情况, 主要用于debug. 上线后记得关掉 -->
+		<!-- <property name="closeConnectionWatch" value="false" /> -->
+		<!-- 打印执行的SQL语句，如果用了其他能打印SQL语句的框架，可关闭 -->
+		<!-- <property name="logStatementsEnabled" value="true" /> -->
+		<!-- 在获取连接失败后的重试次数, 默认:5 -->
+		<!-- <property name="acquireRetryAttempts" value="5" /> -->
+		<!-- 自动创建最小连接数, true:不创建, 保持为空, 直到有需求要获取连接 -->
+		<!-- <property name="lazyInit" value="true" /> -->
+		<!-- 保存链接上的所有数据库操作 -->
+		<!-- <property name="transactionRecoveryEnabled" value="true" /> -->
+		<!-- 设置连接钩子类名 -->
+		<!-- <property name="connectionHookClassName" value="" /> -->
+		<!-- 自定义连接池名称 -->
+		<!-- <property name="poolName" value="" /> -->
+		<!-- 控制JMX的支持开关 -->
+		<!-- <property name="disableJMX" value="false" /> -->
+	<!-- </bean>
+</beans> -->
+
+<!-- 
+	BoneCP的特性
+    1、高度可扩展, 快速的连接池. 注: 
+    	1）不用synchronized关键字来处理多线程对资源的争用, 而是使用java.util.concurrent包中的锁机制;
+    	2）首次使用分区机制来分开管理数据库连接; 或许还有其他原因.
+    2、Callback (hook interceptor) mechanisms on a change of connection state.
+    3、利用分区技术提高性能
+    4、允许直接访问一个连接或者语句
+    5、智能调整连接池大小
+    6、SQL语句缓存支持
+    7、支持异步获取数据库连接
+    	  (通过返回Future<Connection>的形式)
+    8、通过释放连接助理进程来释放数据库连接, 提高性能.
+    9、通过initSQL参数在每次获取连接的时候执行SQL
+    10、支持数据库热切换
+    11、当数据库或者网络挂掉的时候, 自动重试失败的数据库操作
+    12、JMX support
+    13、延迟初始化能力
+    		(Lazy initialization capable)
+    14、自动检测连接可用性
+    		(keep-alives 等)
+    15、允许直接通过数据源而不是通过驱动来获取一个新的数据库连接
+    		(Allow obtaining of new connections via a datasource rather than via a Driver)
+    16、Datasource/Hibernate support capable
+    17、Debug支持准确地高亮那些已经得到但是还没有关闭的链接
+    		(Debugging hooks to highlight the exact place where a connection was obtained but not closed)
+    18、Debug支持展示那些被关闭两次的链接地址堆栈信息
+    		(Debugging support to show stack locations of connections that were closed twice)
+    19、支持自定义连接池名称
+    20、干净的代码结构, TestCase代码覆盖率达到100%(over 125 JUnit tests)
+    21、免费开源的而且都是用java干的, 最重要的是有很完整的javadocs支持
+    		(Free, open source and written in 100% pure Java with complete Javadocs)
+ -->

@@ -17,7 +17,8 @@ import org.springframework.context.annotation.ComponentScan;
  * @version 2.0
  */
 @SpringBootConfiguration // 配置类, 推荐替代@Configuration
-@ComponentScan(basePackages = "com.compass.examination")// spring扫包, 如未指定包, 则默认扫描注解所在类的包及子包, 约定优于配置, 尽可能不要去配置而使用默认
+@ComponentScan(basePackages = "com.compass.examination") // spring扫包, 如未指定包, 则默认扫描注解所在类的包及子包, 约定优于配置, 尽可能不要去配置而使用默认
+	//, excludeFilters = {@Filter(type = FilterType.ANNOTATION, value = Controller.class)})
 @SpringBootApplication // 核心注解，开启自动配置, (exclude = { XxxxAutoConfiguration.class })则是关闭某项自动配置
 public class RootApplication extends SpringBootServletInitializer{ 	
 
